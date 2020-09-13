@@ -1,0 +1,7 @@
+[b]Virtual Teacup[/b]
+
+Before you read the tea leaves, you should ask a question or pick a topic you want to consider.
+
+*if not(my_question = "")
+	My question is: ${my_question}
+	*finish

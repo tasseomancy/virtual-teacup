@@ -1,0 +1,100 @@
+*comment Copyright 2016 by Alice Leung
+*comment 
+
+*title Virtual Teacup
+*author nuclearpolymer
+*scene_list
+	picture
+
+*comment This is your question
+*create my_question ""
+*comment This is your random picture number
+*create picture_number 1
+*comment This is how many pictures are in the directory
+*create total_pictures 35
+*comment This is your file name
+*create file_name "pic1"
+*comment track if you've already asked for help
+*create new_pic true
+*comment your omen
+*create shape "your shape"
+
+[b]Virtual Teacup[/b] is like having a nice pot of tea in your pocket, without any danger of boiling water in your pants! Go straight to reading tea leaves without the fuss of brewing and drinking actual tea. Simply declare your question, swirl your virtual teacup, dump out the dregs of virtual tea, and you answer will be revealed though shapes appearing in the leaves. 
+*image pic0.jpg
+*label start
+Before you read the virtual tea leaves, jot down the question you want answered, or the topic you are contemplating.
+*input_text my_question
+*label swirl
+*page_break
+Now, swirl your virtual teacup while thinking about your question.
+*rand picture_number 1 total_pictures
+*page_break
+
+*set new_pic true
+*set file_name "pic"&picture_number
+*set file_name file_name&".jpg"
+*image ${file_name}
+Read the tea leaves by looking for shapes in the tea leaves and interpreting those shapes as omens.
+
+*label read
+*choice
+	*selectable_if (new_pic) #I need help reading these leaves.
+		*set new_pic false
+		*image ${file_name}
+		I see a shape like:
+		*fake_choice
+			#An animal. 
+				*image ${file_name}
+				Specifically, it looks like:
+				*fake_choice
+					#A bird.
+						*set shape "a bird"
+					#A dog.
+						*set shape "a dog"
+					#A bug.
+						*set shape "a bug"
+					#A turtle.
+						*set shape "a turtle"
+				*goto omens
+			#An object.
+				*image ${file_name}
+				Specifically, it looks like:
+				*fake_choice
+					#A stone.
+						*set shape "a stone"
+					#A cup.
+						*set shape "a cup"
+					#A seed.
+						*set shape "a seed"
+					#A knife.
+						*set shape "a knife"
+				*goto omens
+			#A body part.
+				*image ${file_name}
+				Specifically, it looks like:
+				*fake_choice
+					#A foot.
+						*set shape "a foor"
+					#A heart.
+						*set shape "a heart"
+					#An eye.
+						*set shape "an eye"
+					#A fist.
+						*set shape "a fist"
+				*goto omens
+	#I have another question.
+		*goto start
+	#I want another answer.
+		*goto swirl
+	#I'm done.
+		*goto done
+
+*label omens
+*page_break
+*image ${file_name}
+Think about what ${shape} means to you. Use your imagination. Don't be afraid to be silly. (After all, you're using a [i]virtual teacup[/i].)
+*goto read
+		
+*label done
+Thanks for using Virtual Teacup!
+*ending
